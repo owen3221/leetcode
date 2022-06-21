@@ -1,0 +1,51 @@
+class Solution {
+    
+public:
+    //用磚塊
+    void usebricks(int a,int b , int* bricks){
+        *bricks -= (b-a);
+        }
+    
+    
+   /* //用梯子
+        void useladders(int a,int b , int& ladders){
+        &ladders -= (b-a);
+        }*/
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
+        int a = bricks;
+        int b = ladders;
+        priority_queue <int> delta;
+
+        //開始推進
+        for(int i=0;i<heights.size()-1;i++){
+            //要往上時
+            if(heights[i]<heights[i+1]){
+                delta.push(heights[i+1]-heights[i]);
+                usebricks(heights[i],heights[i+1],&a);
+                //用磚頭(三個狀況，夠用、不夠用但有梯子、不夠用且沒梯子 )
+                //沒磚頭但有梯子(找最高差距的磚頭換成梯子)
+                if(a < 0 && b > 0 ){
+                    
+                    b -= 1;
+                    
+                    a += delta.top();
+                    
+                    delta.pop();
+                    
+                    
+                    continue;
+                    }
+                //用完了直接給答案吧
+                else if(a < 0 && b<=0 ){
+                    return i;
+                }
+
+
+                
+                
+            }
+        
+        }
+        return heights.size()-1;
+    }
+};
