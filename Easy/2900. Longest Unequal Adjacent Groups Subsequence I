@@ -1,2 +1,20 @@
 #過了三年又來寫leetcode是否搞錯了什麼(2025.5.16)
 #明明要考研怎麼還有時間看leetcode，final project都還沒看
+#今天是easy，2分鐘寫完，都要畢業了index還是會搞錯
+class Solution(object):
+    def getLongestSubsequence(self, words, groups):
+        """
+        :type words: List[str]
+        :type groups: List[int]
+        :rtype: List[str]
+        """
+        ans=[]
+        ans.append(words[0])
+        if len(words)==1 :
+            return words
+        i=0
+        while(i+1 < len(words)):  
+            if groups[i+1]!=groups[i]:
+               ans.append(words[i+1])
+            i += 1
+        return ans
